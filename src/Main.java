@@ -3,47 +3,38 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class Main {
-    public static String startDate;
     public static LocalDate date1;
     public static LocalDate date2;
-    public static String temp;
     public static final DateTimeFormatter dataFormat = DateTimeFormatter.ofPattern("dd MMMM EEEE yyyy");
 
     public static void main(String[] args) {
-        enterDates();
-        date1 = date();
-        date2 = date();
+        date1 = enterDate();
+        date2 = enterDate();
         weekDays();
     }
 
-    public static void enterDates() {
-        System.out.println("Введите даты:");
-    }
-
-    public static LocalDate date() {
-        startDate = new Scanner(System.in).nextLine();
-        return LocalDate.parse(startDate);
+    public static LocalDate enterDate() {
+        System.out.println("Введите дату:");
+        return LocalDate.parse(new Scanner(System.in).nextLine());
     }
 
     public static void weekDays() {
-        while (date1.isBefore(date2)) {
+        while (date1.isBefore(date2) || date1.equals(date2)) {
             if (date1.getDayOfWeek().getValue() <= 5) {
-                temp = date1.format(dataFormat);
-                print();
+                print(date1.format(dataFormat));
             } else {
-                temp = date1.format(dataFormat);
-                printWeekEnds();
+                printWeekEnds(date1.format(dataFormat));
             }
             date1 = date1.plusDays(1);
         }
-        System.out.println("\u001B[31m" + date2.format(dataFormat));
+
     }
 
-    public static void print() {
+    public static void print(String temp) {
         System.out.println("\u001B[0m" + temp);
     }
 
-    public static void printWeekEnds() {
+    public static void printWeekEnds(String temp) {
         System.out.println("\u001B[31m" + temp);
     }
 }
