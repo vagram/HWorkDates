@@ -7,7 +7,7 @@ public class Main {
     public static LocalDate date1;
     public static LocalDate date2;
     public static String temp;
-    public static DateTimeFormatter dataFormat = DateTimeFormatter.ofPattern("dd MMMM EEEE yyyy");
+    public static final DateTimeFormatter dataFormat = DateTimeFormatter.ofPattern("dd MMMM EEEE yyyy");
 
     public static void main(String[] args) {
         enterDates();
@@ -36,6 +36,7 @@ public class Main {
             }
             date1 = date1.plusDays(1);
         }
+        System.out.println("\u001B[31m" + date2.format(dataFormat));
     }
 
     public static void print() {
